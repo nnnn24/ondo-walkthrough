@@ -1,6 +1,5 @@
 import { useMobileWalkthrough } from './MobileWalkthroughSystem';
-import { Play } from 'lucide-react';
-import { Button } from './ui/button';
+import { useEffect } from 'react';
 
 export interface WalkthroughData {
   name?: string;
@@ -27,25 +26,18 @@ export interface WalkthroughData {
 export function StandaloneDemoViewer({ demoData }: { demoData?: WalkthroughData }) {
   const { startWalkthrough } = useMobileWalkthrough();
 
-  const handleStartDemo = () => {
-    if (demoData) {
-      startWalkthrough(demoData);
-    }
-  };
+  useEffect(() => {
+    const handleStartDemo = () => {
+      if (demoData) {
+        startWalkthrough(demoData);
+      }
+    };
+
+    handleStartDemo();
+  }, [demoData])
+
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Start Demo Button */}
-      <div className="text-center">
-        <Button
-          size="lg"
-          onClick={handleStartDemo}
-          className="px-8 py-3"
-        >
-          <Play className="mr-2 h-5 w-5" />
-          Start Interactive Walkthrough
-        </Button>
-      </div>
-    </div>
+    <></>
   );
 }
